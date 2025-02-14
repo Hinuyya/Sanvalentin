@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Mi San Valentín!</title>
+    <style>
+        /* Mantener mismos estilos anteriores */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .pantalla-inicial {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        h1 {
+            color: #ff0066;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .botones {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        #btnNo {
+            background-color: #ff4444;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: static;
+        }
+
+        #btnSi {
+            background-color: #44cc44;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .gif-container {
+            max-width: 90%;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .gif-valentin {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .pantalla-si {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s;
+            width: 100%;
+        }
+
+        .mensaje-si {
+            color: #ff0066;
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            
+            .mensaje-si {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pantalla Principal -->
+    <div class="pantalla-inicial">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        
+        <div class="botones">
+            <button id="btnNo">No</button>
+            <button id="btnSi">Sí</button>
+        </div>
+
+        <!-- GIF Inicial -->
+        <div class="gif-container">
+            <img class="gif-valentin" src="https://ejemplo.com/tu-gif-inicial.gif" alt="Gif San Valentín">
+        </div>
+    </div>
+
+    <!-- Pantalla de Aceptación -->
+    <div class="pantalla-si">
+        <h2 class="mensaje-si">¡Sabía que dirías que sí! 💖</h2>
+        
+        <!-- GIF de Celebración -->
+        <div class="gif-container">
+            <img class="gif-valentin" src="https://ejemplo.com/tu-gif-aceptacion.gif" alt="Celebración">
+        </div>
+    </div>
+
+    <script>
+        // Configuración
+        const gifs = {
+            inicial: src="https://media.tenor.com/tsFBHGxponYAAAAi/bubu-dudu.gif",
+            aceptacion: "https://media.tenor.com/PXCqxx9OIoUAAAAi/milk-and-mocha.gif"
+        };
+
+        const frasesNo = [
+            "¡El verde es mejor! 💚",
+            "¿Segura? 😢",
+            "¡Piénsalo bien! :D",
+            "Okey, me rindo... pero escoge el verde 😉",
+            "¿En serio? :cc",
+            "¡Si sabes que quieres escojer el otro 😁",
+            "Creo que presionaste el equivocado jijiji",
+            "¡Debe ser el destino. ESCOJE EL VERDE😿😿😿",
+            "¿Y si pruebas el otro? 😄",
+            "¡wuajaaaa! 😜"
+        ];
+
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+
+        // Asignar GIFs
+        document.querySelector('.pantalla-inicial .gif-valentin').src = gifs.inicial;
+        document.querySelector('.pantalla-si .gif-valentin').src = gifs.aceptacion;
+
+        // Función de mensajes
+        function mostrarFraseAleatoria() {
+            const frase = frasesNo[Math.floor(Math.random() * frasesNo.length)];
+            const mensaje = document.createElement('div');
+            mensaje.textContent = frase;
+            mensaje.style.position = 'absolute';
+            mensaje.style.color = '#ff0066';
+            mensaje.style.fontWeight = 'bold';
+            mensaje.style.fontSize = '1.2em';
+            mensaje.style.textShadow = '1px 1px 2px white';
+            mensaje.style.padding = '8px 15px';
+            mensaje.style.borderRadius = '15px';
+            mensaje.style.background = 'rgba(255, 255, 255, 0.9)';
+            mensaje.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            mensaje.style.animation = 'fadeInUp 0.5s';
+            
+            const btnRect = btnNo.getBoundingClientRect();
+            mensaje.style.left = `${btnRect.left + (btnNo.offsetWidth/2)}px`;
+            mensaje.style.top = `${btnRect.top - 40}px`;
+            mensaje.style.transform = 'translateX(-50%)';
+            
+            document.body.appendChild(mensaje);
+            
+            setTimeout(() => {
+                mensaje.style.animation = 'fadeOut 0.5s';
+                setTimeout(() => mensaje.remove(), 500);
+            }, 1500);
+        }
+
+        // Sistema de posicionamiento seguro
+        function mantenerEnPantalla(elemento, margin = 10) {
+            const rect = elemento.getBoundingClientRect();
+            const maxX = window.innerWidth - rect.width - margin;
+            const maxY = window.innerHeight - rect.height - margin;
+            
+            return {
+                x: Math.min(Math.max(margin, rect.left), maxX),
+                y: Math.min(Math.max(margin, rect.top), maxY)
+            };
+        }
+
+        function moverBotonNo() {
+            const margin = 10;
+            const safePos = mantenerEnPantalla(btnNo, margin);
+            
+            const randomX = Math.random() * (window.innerWidth - btnNo.offsetWidth - margin * 2) + margin;
+            const randomY = Math.random() * (window.innerHeight - btnNo.offsetHeight - margin * 2) + margin;
+            
+            btnNo.style.transform = `translate(${randomX - safePos.x}px, ${randomY - safePos.y}px)`;
+            mostrarFraseAleatoria();
+        }
+
+        function posicionAbsolutaSegura() {
+            const margin = 10;
+            const maxX = window.innerWidth - btnNo.offsetWidth - margin;
+            const maxY = window.innerHeight - btnNo.offsetHeight - margin;
+            
+            const randomX = Math.random() * maxX + margin;
+            const randomY = Math.random() * maxY + margin;
+            
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = `${randomX}px`;
+            btnNo.style.top = `${randomY}px`;
+            mostrarFraseAleatoria();
+        }
+
+        // Eventos
+        btnSi.addEventListener('click', () => {
+            document.querySelector('.pantalla-inicial').style.display = 'none';
+            document.querySelector('.pantalla-si').style.display = 'flex';
+        });
+
+        btnNo.addEventListener('mouseover', moverBotonNo);
+        btnNo.addEventListener('click', posicionAbsolutaSegura);
+        btnNo.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            posicionAbsolutaSegura();
+        });
+    </script>
+</body>
+</html>
